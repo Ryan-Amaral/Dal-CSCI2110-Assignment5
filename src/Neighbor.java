@@ -5,7 +5,7 @@
  * adding an edge weight field, which may then be used in the implementation
  * of a weighted graph.
  * 
- * @author Sesh Venugopal
+ * @author Sesh Venugopal, modified by Ryan Amaral
  *
  */
 public class Neighbor {

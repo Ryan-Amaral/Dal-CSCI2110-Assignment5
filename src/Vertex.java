@@ -5,7 +5,7 @@
  * This class encapsulates a vertex by packaging together the client-supplied
  * vertex object and a reference to the list of its neighbors.
  * 
- * @author Sesh Venugopal
+ * @author Sesh Venugopal, modified by Ryan Amaral
  *
  */
 public class Vertex<T> {

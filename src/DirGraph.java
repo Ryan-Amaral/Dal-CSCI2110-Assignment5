@@ -2,6 +2,7 @@
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.ArrayDeque;
 
 /**
  * This class implements a directed graph. An undirected grapph can be implemented
@@ -173,6 +174,39 @@ public class DirGraph<T> {
             Vertex<T> vert = v.next();
             vert.setDiscovered(false);
         }
+    }
+    
+    public List<T> breadthFirstSearch(T start){
+        
+        cleanVertices(); // make all verts not discovered
+        
+        List<T> sequence = new List<T>(); // the sequence of steps taken
+        ArrayDeque<T> queue = new ArrayDeque<T>(); // queue to help traverse
+        queue.add(start); // add first element to queue
+        sequence.add(start); // add first to sequence
+        setDiscovered(vertexNumberOf(start), true); // start is discovered
+        
+        T cur; // the current vertex to look at
+        T nbr; // to iterate through neighbors
+        Neighbor nbrObj; // to check next neighbor for null
+        
+        while(!queue.isEmpty()){
+            cur = queue.remove(); // get next
+            
+            // add all neighbors not in sequence into it
+            nbrObj = firstNeighbor(vertexNumberOf(cur));
+            while(nbrObj != null){
+                nbr = vertexInfoOf(nbrObj.vertexNumber);
+                if(!isDiscovered(vertexNumberOf(nbr))){
+                    queue.add(nbr);
+                    sequence.add(nbr);
+                    setDiscovered(vertexNumberOf(nbr), true);
+                }
+                nbrObj = nextNeighbor(vertexNumberOf(cur));
+            }
+        }
+        
+        return sequence;
     }
 }
 

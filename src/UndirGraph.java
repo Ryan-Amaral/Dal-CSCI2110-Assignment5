@@ -7,7 +7,7 @@ import java.util.Stack;
  * kind of directed graph--an undirected edge is two directed edges in opposite
  * directions--it is implemented by subclassing DirGraph.
  * 
- * @author Sesh Venugopal
+ * @author Sesh Venugopal, modified by Ryan Amaral
  *
  */
 public class UndirGraph<T> extends DirGraph<T> {
@@ -60,8 +60,7 @@ public class UndirGraph<T> extends DirGraph<T> {
                 nbrObj = firstNeighbor(vertexNumberOf(cur));
                 while(nbrObj != null){
                     nbr = vertexInfoOf(nbrObj.vertexNumber);
-                    if(!isDiscovered(vertexNumberOf(nbr)))
-                        stack.push(nbr);
+                    stack.push(nbr);
                     nbrObj = nextNeighbor(vertexNumberOf(cur));
                 }
             }

@@ -2,7 +2,7 @@
 /**
  * This class implements a generic unordered list.
  *
- * @author Sesh Venugopal
+ * @author Sesh Venugopal, modified by Ryan Amaral
  * 
  * @param <T> The type of objects to be stored in this unordered list.
  */
@@ -136,9 +136,8 @@ public class List<T> {
             cur = next();
             if(cur != null)
                 output += ", ";
-            else
-                output += "}";
         }
+        output += "}";
         
         return output;
     }
