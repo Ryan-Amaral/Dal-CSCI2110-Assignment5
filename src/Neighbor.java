@@ -11,17 +11,40 @@
 public class Neighbor {
     
     /**
+     * The default weight of a connection.
+     */
+    private static final int DEFAULT_WEIGHT = 1;
+    
+    /**
      * Internal vertex number of neighbor.
      */
     public int vertexNumber;
     
+    
     /**
-     * Initializes a new instance with given vertex number.
+     * Weight used by weighted graphs, ignored by non-weighted graphs.
+     */
+    public int weight;
+    
+    /**
+     * Initializes a new instance with given vertex number and default weight.
      * 
      * @param vertexNum Vertex number.
      */
     public Neighbor(int vertexNum) {
         vertexNumber = vertexNum;
+        weight = DEFAULT_WEIGHT;
+    }
+    
+    /**
+     * Initializes a new instance with given vertex number and weight.
+     * 
+     * @param vertexNum Vertex number.
+     * @param weight Weight.
+     */
+    public Neighbor(int vertexNum, int weight){
+        vertexNumber = vertexNum;
+        this.weight = weight;
     }
     
     /* (non-Javadoc)

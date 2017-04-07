@@ -31,16 +31,9 @@ public class WeightedUndirGraph<T> extends UndirGraph<T> {
     /* (non-Javadoc)
      * @see structures.graph.DirGraph#addEdge(int, structures.graph.Neighbor)
      */
-    public void addEdge(int vertexNumber, WeightedNeighbor nbr) {
+    public void addEdge(int vertexNumber, Neighbor nbr) {
         super.addEdge(vertexNumber, nbr);
-        super.addEdge(nbr.vertexNumber, new WeightedNeighbor(vertexNumber));
-    }
-
-    /* (non-Javadoc)
-     * @see structures.graph.DirGraph#addEdge(int, structures.graph.Neighbor)
-     */
-    public void addEdge(int vertexNumber, WeightedNeighbor nbr, int weight) {
-        super.addEdge(vertexNumber, nbr);
-        super.addEdge(nbr.vertexNumber, new WeightedNeighbor(vertexNumber, weight));
+        // added the weight of neighbor in this one
+        super.addEdge(nbr.vertexNumber, new Neighbor(vertexNumber, nbr.weight));
     }
 }
