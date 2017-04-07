@@ -122,4 +122,24 @@ public class List<T> {
         cursor++;
         return elements.getAt(cursor);
     }
+    
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    public String toString(){
+        
+        String output = "{";
+        
+        T cur = first();
+        while(cur != null){
+            output += cur.toString();
+            cur = next();
+            if(cur != null)
+                output += ", ";
+            else
+                output += "}";
+        }
+        
+        return output;
+    }
 }

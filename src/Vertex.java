@@ -40,4 +40,8 @@ public class Vertex<T> {
         }
         return false;
     }
+    
+    public String toString(){
+        return info.toString();
+    }
 }
