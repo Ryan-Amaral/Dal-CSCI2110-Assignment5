@@ -20,7 +20,6 @@ public class Neighbor {
      */
     public int vertexNumber;
     
-    
     /**
      * Weight used by weighted graphs, ignored by non-weighted graphs.
      */

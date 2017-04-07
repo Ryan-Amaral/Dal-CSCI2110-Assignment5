@@ -1,13 +1,14 @@
 
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * This class implements a directed graph. An undirected grapph can be implemented
  * by subclassing this class. Weights may be attached to the edges by subclassing the
  * Neighbor class accordingly.
  * 
- * @author Sesh Venugopal
+ * @author Sesh Venugopal, modifications by Ryan Amaral
  *
  * @param <T> The type of object used to represent vertices.
  */
@@ -115,6 +116,26 @@ public class DirGraph<T> {
     }
     
     /**
+     * Change whether the current vertex is discovered or not.
+     * @param vertexNumber The number of the vertex to change discovery on.
+     * @param discovered Whether vertex is discovered
+     */
+    public void setDiscovered(int vertexNumber, boolean discovered){
+        Vertex<T> v = adjlists.get(vertexNumber);
+        v.setDiscovered(discovered);
+    }
+    
+    /**
+     * Whether the current vertex is discovered or not.
+     * @param vertexNumber The number of the vertex to check.
+     * @return Whether the current vertex is discovered or not.
+     */
+    public boolean isDiscovered(int vertexNumber){
+        Vertex<T> v = adjlists.get(vertexNumber);
+        return v.isDiscovered();
+    }
+    
+    /**
      * Returns the first neighbor of a given vertex.
      * 
      * @param vertexNumber Internal number of vertex.
@@ -142,6 +163,16 @@ public class DirGraph<T> {
      */
     public void clear() {
         adjlists.clear();
+    }
+    
+    /**
+     * Marks all vertices as not discovered.
+     */
+    public void cleanVertices(){
+        for(Iterator<Vertex<T>> v = adjlists.iterator(); v.hasNext();){
+            Vertex<T> vert = v.next();
+            vert.setDiscovered(false);
+        }
     }
 }
 

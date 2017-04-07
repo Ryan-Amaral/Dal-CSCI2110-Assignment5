@@ -13,7 +13,13 @@ public class Vertex<T> {
     /**
      * Client-supplied vertex information.
      */
-    protected T info;         
+    protected T info;
+    
+    
+    /**
+     * To help in traversals.
+     */
+    private boolean discovered;
     
     /**
      * Neighbors of this vertex.
@@ -26,6 +32,7 @@ public class Vertex<T> {
      * @param vertexInfo Vertex information.
      */
     protected Vertex(T vertexInfo) {
+        setDiscovered(false); // default not discovered
         info = vertexInfo;
         neighbors = new List<Neighbor>();
     }
@@ -43,5 +50,13 @@ public class Vertex<T> {
     
     public String toString(){
         return info.toString();
+    }
+
+    public boolean isDiscovered() {
+        return discovered;
+    }
+
+    public void setDiscovered(boolean discovered) {
+        this.discovered = discovered;
     }
 }
