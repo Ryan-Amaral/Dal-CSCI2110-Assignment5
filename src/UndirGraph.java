@@ -3,6 +3,7 @@ import java.util.Iterator;
 import java.util.Stack;
 import java.util.PriorityQueue;
 import java.util.HashMap;
+import java.util.HashSet;
 
 /**
  * This class implements an undirected graph. Since an undirected graph is a special
@@ -85,8 +86,6 @@ public class UndirGraph<T> extends DirGraph<T> {
      */
     public List<NodeDistance<T>> dijkstrasAlgorithm(T start){
         
-        cleanVertices(); // make all verts not discovered
-        
         // the distances between each node and start
         List<NodeDistance<T>> nodesDistances = new List<NodeDistance<T>>();
         PriorityQueue<NodeDistance<T>> pqueue = new PriorityQueue<NodeDistance<T>>();
@@ -142,7 +141,91 @@ public class UndirGraph<T> extends DirGraph<T> {
         return nodesDistances;
     }
     
-    public void kruskalsAlgorithm(){
+    /**
+     * Runs Kruskal's algorithm on the graph to get the minimum spanning tree.
+     * @return A list of NodeDistance<T> objects, which shows which edges are part of the MST,
+     * as well as the distance of the edges. Edges displayed as "From->To: Distance".
+     */
+    public List<NodeDistance<T>> kruskalsAlgorithm(){
         
+        // the list containing vertex pairs in MST
+        List<NodeDistance<T>> mstMembers = new List<NodeDistance<T>>();
+        
+        // all sets of vertices
+        List<HashSet<T>> vertexSets = new List<HashSet<T>>();
+        // priority queue for closest neighbor
+        PriorityQueue<NodeDistance<T>> pqueue = new PriorityQueue<NodeDistance<T>>();
+        
+        // to help with initializing
+        NodeDistance<T> tmpNodeDist;
+        HashSet<T> tmpHashSet;
+
+        T nbr; // the value of neighbor node
+        Neighbor nbrObj; // to check next neighbor for null
+        
+        // add all edges with distances to priority queue, and all vertices to own set
+        for(Iterator<Vertex<T>> v = adjlists.iterator(); v.hasNext();){
+            Vertex<T> vert = v.next(); // the current vertex
+            
+            tmpHashSet = new HashSet<T>();
+            tmpHashSet.add(vert.info); // add vertex to hash set
+            vertexSets.add(tmpHashSet); // add new hash set with 1 vert to list
+            
+            // add all neighbors to pqueue
+            nbrObj = firstNeighbor(vertexNumberOf(vert.info));
+            while(nbrObj != null){
+                nbr = vertexInfoOf(nbrObj.vertexNumber);
+                pqueue.add(new NodeDistance<T>(vert.info, nbr, nbrObj.weight, nbrObj.vertexNumber));
+                nbrObj = nextNeighbor(vertexNumberOf(vert.info)); // get next neighbor
+            }
+        }
+        
+        // references to clusters that contain the respective vertices of an edge
+        HashSet<T> cluster1;
+        HashSet<T> cluster2;
+        
+        // add all needed vertex pairs to MST
+        // needs to be amount of vertices - 1
+        while(mstMembers.size() < adjlists.size() - 1){
+            tmpNodeDist = pqueue.remove(); // get smallest distance neighbors
+            cluster1 = getClusterOf(tmpNodeDist.From, vertexSets);
+            cluster2 = getClusterOf(tmpNodeDist.To, vertexSets);
+            // if verts are not in same cluster
+            if(cluster1 != cluster2){
+                mstMembers.add(tmpNodeDist); // add to mst
+                mergeClusters(cluster1, cluster2); // 1 consumes 2
+                vertexSets.remove(cluster2); // removes obsolete one
+            }
+        }
+        
+        return mstMembers;
+    }
+    
+    /**
+     * Returns the cluster that data belongs to, from set clusterSet.
+     * @param data The data to look for.
+     * @param clusterSet The set of all clusters to search in.
+     * @return The cluster that data belongs to, from set clusterSet.
+     */
+    private HashSet<T> getClusterOf(T data, List<HashSet<T>> clusterSet){
+        HashSet<T> curSet = clusterSet.first();
+        while(curSet != null){
+            if(curSet.contains(data))
+                return curSet; // the set
+            curSet = clusterSet.next();
+        }
+        return null; // no set found
+    }
+    
+    /**
+     * Puts all of the elements from cluster 2 into cluster 1.
+     * @param cluster1 The first cluster.
+     * @param cluster2 The second cluster.
+     */
+    public void mergeClusters(HashSet<T> cluster1, HashSet<T> cluster2){
+        // add all of cluster 2 into the cluster 1
+        for(Iterator<T> i = cluster2.iterator(); i.hasNext();){
+            cluster1.add(i.next());
+        }
     }
 }

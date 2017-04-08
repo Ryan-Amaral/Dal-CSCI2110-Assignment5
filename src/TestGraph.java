@@ -17,16 +17,18 @@ public class TestGraph {
         WeightedUndirGraph<String> graph = createGraph1();
         
         // Calling its DFS
-        System.out.println("Graph 1 DFS: " + graph.depthFirstSearch("A").toString());
+        System.out.println("Graph 1 DFS:\n" + graph.depthFirstSearch("A").toString());
 
         // Calling its BFS
-        System.out.println("Graph 1 BFS: " + graph.breadthFirstSearch("A").toString());
+        System.out.println("\nGraph 1 BFS:\n" + graph.breadthFirstSearch("A").toString());
 
         // Calling Dijkstra (S)
-        System.out.println(graph.dijkstrasAlgorithm("A"));
+        System.out.println("\nGraph 1 Dijkstra's (Showing distances between nodes):\n" 
+                    + graph.dijkstrasAlgorithm("A"));
 
         // Calling Kruskal
-
+        System.out.println("\nGraph 1 Kruskal's (Showing vertex pairs that are in MST with distances):\n" 
+                    + graph.kruskalsAlgorithm());
         
         System.out.println();
         
@@ -34,16 +36,18 @@ public class TestGraph {
         graph = createGraph2();
         
         // Calling its DFS
-        System.out.println("Graph 2 DFS: " + graph.depthFirstSearch("A").toString());
-        
+        System.out.println("Graph 2 DFS:\n" + graph.depthFirstSearch("A").toString());
+
         // Calling its BFS
-        System.out.println("Graph 2 BFS: " + graph.breadthFirstSearch("A").toString());
-        
+        System.out.println("\nGraph 2 BFS:\n" + graph.breadthFirstSearch("A").toString());
+
         // Calling Dijkstra (S)
-        System.out.println(graph.dijkstrasAlgorithm("A"));
+        System.out.println("\nGraph 2 Dijkstra's (Showing distances between nodes):\n" 
+                    + graph.dijkstrasAlgorithm("A"));
 
         // Calling Kruskal
-
+        System.out.println("\nGraph 2 Kruskal's (Showing vertex pairs that are in MST with distances):\n" 
+                    + graph.kruskalsAlgorithm());
 
     }
     
