@@ -76,6 +76,13 @@ public class UndirGraph<T> extends DirGraph<T> {
         return sequence;
     }
     
+    /**
+     * Generates a list of the distances between the selected start node and 
+     * all other nodes in the graph.
+     * @param start The node to compare distance to all others with.
+     * @return A list of the distances between the selected start node and 
+     * all other nodes in the graph.
+     */
     public List<NodeDistance<T>> dijkstrasAlgorithm(T start){
         
         cleanVertices(); // make all verts not discovered
@@ -106,6 +113,7 @@ public class UndirGraph<T> extends DirGraph<T> {
         Neighbor nbrObj; // to check next neighbor for null
         
         while(!pqueue.isEmpty()){
+            // add node to cloud
             cur = pqueue.remove(); // get lowest distance node
             curNode = cur.To;
             
@@ -115,7 +123,7 @@ public class UndirGraph<T> extends DirGraph<T> {
             nbrObj = firstNeighbor(vertexNumberOf(curNode));
             while(nbrObj != null){
                 nbr = vertexInfoOf(nbrObj.vertexNumber);
-                // is current neighbor in pqueue?
+                // is current neighbor in pqueue? If not, it is in cloud
                 if(pqueue.contains(nbrObj)){
                     int potentialDist = cur.Distance + nbrObj.weight;
                     // is new distance better?
@@ -132,5 +140,9 @@ public class UndirGraph<T> extends DirGraph<T> {
         }
         
         return nodesDistances;
+    }
+    
+    public void kruskalsAlgorithm(){
+        
     }
 }
