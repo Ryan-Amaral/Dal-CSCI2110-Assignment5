@@ -176,6 +176,11 @@ public class DirGraph<T> {
         }
     }
     
+    /**
+     * Starts with node start and returns the path taken from a breadth first search.
+     * @param start The node to start at.
+     * @return List of visited nodes in breadth first order.
+     */
     public List<T> breadthFirstSearch(T start){
         
         cleanVertices(); // make all verts not discovered

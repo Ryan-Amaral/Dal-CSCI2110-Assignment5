@@ -1,6 +1,7 @@
 
 import java.util.Iterator;
 import java.util.Stack;
+import java.util.PriorityQueue;
 
 /**
  * This class implements an undirected graph. Since an undirected graph is a special
@@ -36,6 +37,11 @@ public class UndirGraph<T> extends DirGraph<T> {
         super.addEdge(nbr.vertexNumber, new Neighbor(vertexNumber));
     }
     
+    /**
+     * Starts with node start and returns the path taken from a depth first search.
+     * @param start The node to start at.
+     * @return List of visited nodes in depth first order.
+     */
     public List<T> depthFirstSearch(T start){
         
         cleanVertices(); // make all verts not discovered
@@ -66,7 +72,21 @@ public class UndirGraph<T> extends DirGraph<T> {
             }
         }
         
-        
         return sequence;
+    }
+    
+    public List<NodeDistance<T>> dijkstrasAlgorithm(T start){
+        
+        cleanVertices(); // make all verts not discovered
+        
+        // the distances between each node and start
+        List<NodeDistance<T>> nodesDistances = new List<NodeDistance<T>>();
+        
+        
+        T cur; // the current vertex to look at
+        T nbr; // to iterate through neighbors
+        Neighbor nbrObj; // to check next neighbor for null
+        
+        return nodesDistances;
     }
 }
