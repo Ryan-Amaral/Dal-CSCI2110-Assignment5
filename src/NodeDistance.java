@@ -35,7 +35,7 @@ public class NodeDistance<T> implements Comparator<NodeDistance<T>>, Comparable 
     @Override
     public int compare(NodeDistance<T> me, NodeDistance<T> other)
     {
-        return other.Distance - me.Distance;
+        return me.Distance - other.Distance;
     }
     
     /* (non-Javadoc)
@@ -46,8 +46,11 @@ public class NodeDistance<T> implements Comparator<NodeDistance<T>>, Comparable 
     }
 
     @Override
-    public int compareTo(Object arg0) {
-        // TODO Auto-generated method stub
-        return 0;
+    public int compareTo(Object other) {
+        if ((other != null) && (other instanceof NodeDistance<?>)) {
+            return this.Distance - ((NodeDistance<T>)other).Distance;
+        }else{
+            return 0;
+        }
     }
 }

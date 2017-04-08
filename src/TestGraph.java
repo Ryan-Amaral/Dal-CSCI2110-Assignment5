@@ -40,7 +40,7 @@ public class TestGraph {
         System.out.println("Graph 2 BFS: " + graph.breadthFirstSearch("A").toString());
         
         // Calling Dijkstra (S)
-
+        System.out.println(graph.dijkstrasAlgorithm("A"));
 
         // Calling Kruskal
 

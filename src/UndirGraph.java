@@ -35,7 +35,7 @@ public class UndirGraph<T> extends DirGraph<T> {
      */
     public void addEdge(int vertexNumber, Neighbor nbr) {
         super.addEdge(vertexNumber, nbr);
-        super.addEdge(nbr.vertexNumber, new Neighbor(vertexNumber));
+        super.addEdge(nbr.vertexNumber, new Neighbor(vertexNumber, nbr.weight));
     }
     
     /**
