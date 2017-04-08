@@ -54,6 +54,10 @@ public class Neighbor {
             Neighbor another = (Neighbor)other;
             return (vertexNumber == another.vertexNumber);
         }
+        // modification to compare to NodeDistance object
+        else if((other != null) && (other instanceof NodeDistance)){
+            return vertexNumber == ((NodeDistance<?>)other).VertexNumber;
+        }
         return false;
     }
 }
